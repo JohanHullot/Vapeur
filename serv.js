@@ -29,10 +29,6 @@ app.get("/", async (req, res) =>
     // res.json(barbarreeee);
 })
 
-app.get("/drop", async (req, res) => 
-{
-    //await prisma.barbarreeee.delete()
-})
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
