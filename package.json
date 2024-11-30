@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@prisma/client": "^6.0.0",
+    "express": "^4.21.1",
+    "hbs": "^4.2.0",
+    "prisma": "^6.0.0",
+    "sqlite3": "^5.1.7"
+  },
+  "name": "vapeur",
+  "version": "1.0.0",
+  "main": "serv.js",
+  "scripts": {
+    "start": "node serv.js",
+    "dev": "nodemon serv.js",
+    "test": "jest",
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
