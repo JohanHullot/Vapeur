@@ -1,7 +1,9 @@
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
-const hbs = require("hbs")
+const hbs = require("hbs");
 const path = require("path");
+const utils = require("./utils.js");
+
 
 app = express();
 prisma = new PrismaClient();
@@ -10,23 +12,16 @@ PORT = 3015;
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
 
-const barbarreeee = await prisma.barbarreeee.findMany();
 
 app.get("/", async (req, res) =>
 {
+    //utils.createCategory(); Données implémentées dans la db
 
-    res.render("index",(barbarreeee));
-    console.log(barbarreeee);
-    // const barbare = {
-    // name: "Inception",
-    // born: new Date(),
-    // };
+    const category = await prisma.Category.findMany(); //Trouve tout les jeux de la base de donnees
 
-    // const newbarbare = await prisma.barbarreeee.create({
-    //     data: barbare,
-    // }); // retourne l'objet Movie créé avec son ID
-
-    // res.json(barbarreeee);
+    res.render("index",{    //index.hbs est afficher sur le site
+        category,
+    });
 })
 
 

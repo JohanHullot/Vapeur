@@ -13,11 +13,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model barbarreeee {
-  id        Int      @id @default(autoincrement())
-  name     String
-  isDead    Boolean  @default(false)
-  born DateTime @default(now())
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  game Game[] // Liason à game + [] -> peut avoir plusieurs jeux
+}
+
+model Editor {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  game Game[]
+}
+
+model Game {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  publishDate DateTime @default(now())
+
+  category Category @relation(fields: [gameCategory], references: [id]) // relie Game à Categorie
+  gameCategory Int
+
+  editor   Editor @relation(fields: [gameEditor], references: [id])     // relie Game à Editor
+  gameEditor Int
 }
 
 
