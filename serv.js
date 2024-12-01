@@ -3,22 +3,26 @@ const express = require("express");
 const { PrismaClient } = require("@prisma/client");
 const hbs = require("hbs");
 const path = require("path");
-const utils = require("./utils.js");
-
+const utils = require("./utils.js"); //import local
+//
 
 app = express();
 prisma = new PrismaClient();
 PORT = 3015;
 
+hbs.registerPartials(path.join(__dirname, "/views/partials")); //Donne les chemins des partials
 app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "views")); //Donne le chemin des views que va utiliser app
+
+app.use(express.static("public"));//Fichier de /public/ deviennent visible pour toutes les routes
 
 
 //Route
 
 app.get("/", async (req, res) =>
 {
-    //utils.createCategory(); Données implémentées dans la db
+    //utils.createCategoryDefault(); Données implémentées dans la db
+    //utils.createEditorDefault();
 
     const category = await prisma.Category.findMany(); //Trouve tout les jeux de la base de donnees
 
@@ -26,6 +30,59 @@ app.get("/", async (req, res) =>
         category,
     });
 })
+
+
+//CATEGORY
+app.get("/Category", async (req, res) => {
+    const category = await prisma.Category.findMany();
+    res.render("Category/indexCategory", {
+        category,
+    });
+});
+
+
+app.get("/Category/*", async (req, res) => {  //Prends les pages par categorie grâce à *
+    const category = await prisma.Category.findMany();
+    res.render("Category/indexCategorySolo", {
+        category,
+    });
+});
+
+
+
+
+
+//GAME
+app.get("/Game", async (req, res) => {
+    const game = await prisma.Game.findMany();
+    res.render("Game/indexGame", {
+        game,
+    });
+});
+
+app.get("/Game/*", async (req, res) => {  //Prends les pages par jeu grâce à *
+    const game = await prisma.Game.findMany();
+    res.render("Game/indexGameSolo", {
+        game,
+    });
+});
+
+
+//EDITOR
+app.get("/Editor", async (req, res) => {
+    const editor = await prisma.Editor.findMany();
+    res.render("Editor/indexEditor", {
+        editor,
+    });
+});
+
+app.get("/Editor/*", async (req, res) => {  //Prends les pages par editeur grâce à *
+    const editor = await prisma.Editor.findMany();
+    res.render("Editor/indexEditorSolo", {
+        editor,
+    });
+});
+
 
 //Connexion au Port 3015
 app.listen(PORT, () => {

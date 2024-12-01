@@ -1,7 +1,11 @@
 <h1>Yooooo</h1>
+    <a href="/Category/">Toutes Categories</a>
     {{#each category}}
         <li>
-            {{!-- <a href="/movies/{{id}}">{{title}}</a> // on accède directement aux propriétés de l'objet courant --}}
-            <p>{{name}}</p>
+            <a href="/Category/{{name}}/">{{name}}</a>
         </li>
     {{/each}}
+
+    <a href="/Game/">Tout les jeux</a>
+
+    <a href="/Editor/">Tout les éditeurs</a>
