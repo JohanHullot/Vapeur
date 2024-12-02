@@ -5,7 +5,7 @@ const hbs = require("hbs");
 const path = require("path");
 const utils = require("./utils.js"); //import local
 //
-
+//Preparation des modules
 app = express();
 prisma = new PrismaClient();
 PORT = 3015;
@@ -17,7 +17,7 @@ app.set("views", path.join(__dirname, "views")); //Donne le chemin des views que
 app.use(express.static("public"));//Fichier de /public/ deviennent visible pour toutes les routes
 
 
-//Route
+//Routes
 
 app.get("/", async (req, res) =>
 {
@@ -34,7 +34,7 @@ app.get("/", async (req, res) =>
 
 
 //CATEGORY
-app.get("/Category", async (req, res) => {
+app.get("/Category/", async (req, res) => {
     const category = await prisma.Category.findMany();
     res.render("Category/indexCategory", {
         category,
@@ -42,11 +42,20 @@ app.get("/Category", async (req, res) => {
 });
 
 
-app.get("/Category/:name", async (req, res) => {  //Prends les pages par categorie grâce à *
+app.get("/Category/:name/", async (req, res) => {  //Prends les pages par categorie grâce à *
+
     const category = await prisma.Category.findMany({where: {name: req.params.name} });
-    res.render("Category/indexCategorySolo", {
-        category,
-    });
+
+    if (category[0]) //Cela prends le document style quand je reviens sur toutes categories
+    {    
+        const gameOfCategory = await prisma.Game.findMany({where: {gameCategory: category[0].id} });
+        res.render("Category/indexCategorySolo", {
+            category,
+            gameOfCategory
+        });
+    }
+    else //sinon affiche blanc
+    {res.send()}
 });
 
 
@@ -62,8 +71,26 @@ app.get("/Game", async (req, res) => {
 });
 
 app.get("/Game/:name", async (req, res) => {  //Prends les pages par jeu grâce à *
+
     const game = await prisma.Game.findMany({where: {name: req.params.name} });
-    res.render("Game/indexGameSolo", {
+
+    if (game[0]) //Si le jeu existe
+    {
+        const categoryOfGame = await prisma.Category.findMany({where: {id: game[0].gameCategory} });
+        const editorOfGame = await prisma.Editor.findMany({where: {id: game[0].gameEditor} });
+        res.render("Game/indexGameSolo", {
+            game,
+            categoryOfGame,
+            editorOfGame
+        });
+    }
+    else
+    {res.send()} //sinon affiche blanc
+});
+
+app.get("/addGame", async (req, res) => {
+    const game = await prisma.Game.findMany();
+    res.render("Game/addGame", {
         game,
     });
 });
@@ -79,9 +106,16 @@ app.get("/Editor", async (req, res) => {
 
 app.get("/Editor/:name", async (req, res) => {  //Prends les pages par editeur grâce à *
     const editor = await prisma.Editor.findMany({where: {name: req.params.name} });
-    res.render("Editor/indexEditorSolo", {
-        editor,
-    });
+    if (editor[0]) //Cela prends le document style quand je reviens sur toutes categories
+    {   
+        const gameOfEditor = await prisma.Game.findMany({where: {gameEditor: editor[0].id} });
+        res.render("Editor/indexEditorSolo", {
+            editor,
+            gameOfEditor
+        });
+    }
+    else //sinon affiche blanc
+    {res.send()}
 });
 
 

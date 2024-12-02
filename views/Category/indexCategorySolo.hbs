@@ -1,6 +1,8 @@
     {{#each category}}
     <h2>{{name}}</h2>
     {{/each}}
-<h2></h2>
+    {{#each gameOfCategory}}
+    <a href="../../Game/{{name}}/">{{name}}</a>
+    {{/each}}
 <a href="../">Retour à la page des categories</a>
 <a href="../../">Retour à la page principale</a>
