@@ -21,8 +21,9 @@ app.use(express.static("public"));//Fichier de /public/ deviennent visible pour 
 
 app.get("/", async (req, res) =>
 {
-    //utils.createCategoryDefault(); Données implémentées dans la db
+    //utils.createCategoryDefault(); //Données implémentées dans la db
     //utils.createEditorDefault();
+    //utils.createGameDefault();
 
     const category = await prisma.Category.findMany(); //Trouve tout les jeux de la base de donnees
 
@@ -41,8 +42,8 @@ app.get("/Category", async (req, res) => {
 });
 
 
-app.get("/Category/*", async (req, res) => {  //Prends les pages par categorie grâce à *
-    const category = await prisma.Category.findMany();
+app.get("/Category/:name", async (req, res) => {  //Prends les pages par categorie grâce à *
+    const category = await prisma.Category.findMany({where: {name: req.params.name} });
     res.render("Category/indexCategorySolo", {
         category,
     });
@@ -60,7 +61,7 @@ app.get("/Game", async (req, res) => {
     });
 });
 
-app.get("/Game/*", async (req, res) => {  //Prends les pages par jeu grâce à *
+app.get("/Game/:name", async (req, res) => {  //Prends les pages par jeu grâce à *
     const game = await prisma.Game.findMany();
     res.render("Game/indexGameSolo", {
         game,
@@ -76,7 +77,7 @@ app.get("/Editor", async (req, res) => {
     });
 });
 
-app.get("/Editor/*", async (req, res) => {  //Prends les pages par editeur grâce à *
+app.get("/Editor/:name", async (req, res) => {  //Prends les pages par editeur grâce à *
     const editor = await prisma.Editor.findMany();
     res.render("Editor/indexEditorSolo", {
         editor,

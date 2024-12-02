@@ -23,4 +23,10 @@ CREATE TABLE "Game" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Editor_name_key" ON "Editor"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Game_name_key" ON "Game"("name");
