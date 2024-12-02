@@ -1,6 +1,24 @@
-    <form id="addGameForm">
-    <input type="text" name="" id=""></input>
+<script src="htmlListener.js" defer></script>
 
-    <input type="file" id="inputForPicture">Deposer la photo</input>
-    <input type="submit">Ajouter le jeu à Vapeur</input>
-    </form>
+<form id="addGameForm">
+    <input type="text" id="nameGame" required />
+    <input type="text" id="descGame" required />
+
+<label for="category">Choisir la categorie:</label> 
+<select id="category">
+    {{#each category}}
+        <option id="{{id}}">{{name}}</option>
+    {{/each}}
+</select>
+
+<label for="editor">Choisir l'éditeur:</label>
+<select id="editor">
+    {{#each editor}}
+        <option id="{{id}}">{{name}}</option>
+    {{/each}}
+</select>
+
+
+    <input type="file" id="inputForPicture" value="Deposer la photo"/>
+    <input type="submit" value="Ajouter le jeu à Vapeur"/>
+</form>

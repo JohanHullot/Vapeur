@@ -3,7 +3,7 @@ const express = require("express");
 const { PrismaClient } = require("@prisma/client");
 const hbs = require("hbs");
 const path = require("path");
-const utils = require("./utils.js"); //import local
+//const utils = require("./utils.js"); //import local des fonctions js
 //
 //Preparation des modules
 app = express();
@@ -15,7 +15,6 @@ app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views")); //Donne le chemin des views que va utiliser app
 
 app.use(express.static("public"));//Fichier de /public/ deviennent visible pour toutes les routes
-
 
 //Routes
 
@@ -34,7 +33,7 @@ app.get("/", async (req, res) =>
 
 
 //CATEGORY
-app.get("/Category/", async (req, res) => {
+app.get("/Category", async (req, res) => {
     const category = await prisma.Category.findMany();
     res.render("Category/indexCategory", {
         category,
@@ -42,7 +41,7 @@ app.get("/Category/", async (req, res) => {
 });
 
 
-app.get("/Category/:name/", async (req, res) => {  //Prends les pages par categorie grâce à *
+app.get("/Category/:name", async (req, res) => {  //Prends les pages par categorie grâce à *
 
     const category = await prisma.Category.findMany({where: {name: req.params.name} });
 
@@ -89,11 +88,19 @@ app.get("/Game/:name", async (req, res) => {  //Prends les pages par jeu grâce 
 });
 
 app.get("/addGame", async (req, res) => {
-    const game = await prisma.Game.findMany();
+    const category = await prisma.Category.findMany();
+    const editor = await prisma.Editor.findMany();
     res.render("Game/addGame", {
-        game,
+        category,
+        editor
     });
 });
+
+app.post("/addGame",async (req, res) => {
+    res.send();
+    console.log
+});
+
 
 
 //EDITOR
