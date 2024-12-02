@@ -62,7 +62,7 @@ app.get("/Game", async (req, res) => {
 });
 
 app.get("/Game/:name", async (req, res) => {  //Prends les pages par jeu grâce à *
-    const game = await prisma.Game.findMany();
+    const game = await prisma.Game.findMany({where: {name: req.params.name} });
     res.render("Game/indexGameSolo", {
         game,
     });
@@ -78,7 +78,7 @@ app.get("/Editor", async (req, res) => {
 });
 
 app.get("/Editor/:name", async (req, res) => {  //Prends les pages par editeur grâce à *
-    const editor = await prisma.Editor.findMany();
+    const editor = await prisma.Editor.findMany({where: {name: req.params.name} });
     res.render("Editor/indexEditorSolo", {
         editor,
     });
