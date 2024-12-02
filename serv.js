@@ -96,9 +96,18 @@ app.get("/addGame", async (req, res) => {
     });
 });
 
-app.post("/addGame",async (req, res) => {
-    res.send();
-    console.log
+app.post("/addGame", async (req, res) => {
+
+    //AJOUT DANS LA DB    
+
+
+
+    const category = await prisma.Category.findMany();
+    const editor = await prisma.Editor.findMany();
+    res.render("Game/addGame",{    //index.hbs est afficher sur le site
+        category,
+        editor
+    });
 });
 
 
