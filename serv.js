@@ -107,7 +107,7 @@ app.post("/addGame", async (req, res) => {  //recois le form
         {
             isError = true;
             const nameError = "Le nom du jeu existe déjà";
-            res.render("Game/errorAdd", {
+            res.render("Game/error", {
                 nameError
             });
         }
@@ -122,7 +122,7 @@ app.post("/addGame", async (req, res) => {  //recois le form
         isError = true;
         console.error("Erreur dans l'ajout du jeu", err)
         const nameError = "Une erreur serveur a été detecté";
-        res.render("Game/errorAdd", {
+        res.render("Game/error", {
             nameError
         });
     }
@@ -132,6 +132,16 @@ app.post("/addGame", async (req, res) => {  //recois le form
         res.redirect("/Game");
     }
 });
+
+app.post("/suppressGame", async (req, res) => {
+
+    res.send();
+})
+
+app.post("/editGame", async (req, res) => {
+
+    res.send();
+})
 
 
 //EDITOR
@@ -171,7 +181,7 @@ app.post("/addEditor", async (req, res) => {  //recois le form
         {
             isError = true;
             const nameError = "L'éditeur existe déjà";
-            res.render("Editor/errorAdd", {
+            res.render("Editor/error", {
                 nameError
             });
         }
@@ -186,7 +196,7 @@ app.post("/addEditor", async (req, res) => {  //recois le form
         isError = true;
         console.error("Erreur dans l'ajout de l'éditeur", err)
         const nameError = "Une erreur serveur a été detecté";
-        res.render("Game/errorAdd", {
+        res.render("Editor/error", {
             nameError
         });
     }

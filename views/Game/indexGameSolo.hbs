@@ -9,6 +9,13 @@
     {{#each editorOfGame}}
     <a href="../Editor/{{name}}">{{name}}</a>
     {{/each}}
+
+    <form action="../editGame" id="editGameForm" method="post">
+            <input type="submit" value="Editer"/>
+    </form>
+    <form action="../suppressGame" id="supressGameForm" method="post">
+            <input type="submit" value="Supprimer"/>
+    </form>
     
 <a href="./">Retour à la page des jeux</a>
 <a href="../">Retour à la page principale</a>
