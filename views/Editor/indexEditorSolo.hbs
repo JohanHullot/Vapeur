@@ -1,9 +1,12 @@
-    {{#each editor}}
-    <h2>{{name}}</h2>
-    {{/each}}
-    {{#each gameOfEditor}}
-    <a href=".../Game/{{name}}">{{name}}</a>
-    {{/each}}
+{{#each editor}}
+<h2>{{name}}</h2>
+<a href="../editEditor/{{name}}">Modifier l'éditeur</a>
+<a href="../suppressEditor/{{name}}">Supprimer l'éditeur</a>
+{{/each}}
+{{#each gameOfEditor}}
+<a href=".../Game/{{name}}">{{name}}</a>
+{{/each}}
+
 
 <a href="./">Retour à la page des éditeurs</a>
 <a href="../">Retour à la page principale</a>

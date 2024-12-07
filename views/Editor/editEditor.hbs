@@ -1,0 +1,7 @@
+<form id="editEditorForm" method="post">
+    {{#each editor}}
+        <input type="text" name="name" value="{{name}}" required />
+    {{/each}}
+
+    <input type="submit" value="Changer le nom de l'éditeur"/>
+</form>

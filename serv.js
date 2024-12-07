@@ -4,6 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const hbs = require("hbs");
 const path = require("path");
 const utils = require("./utils.js"); //import local des fonctions js
+const { console } = require("inspector");
 //
 //Preparation des modules
 app = express();
@@ -83,8 +84,10 @@ app.get("/Game/:name", async (req, res) => {  //Prends les pages par jeu grâce 
             editorOfGame
         });
     }
-    else
-    {res.send()} //sinon affiche blanc
+    else //sinon affiche 404
+    {
+        res.render("404");
+    }
 });
 
 app.get("/addGame", async (req, res) => {
@@ -103,7 +106,7 @@ app.post("/addGame", async (req, res) => {  //recois le form
     {
         const gameSameName = await prisma.Game.findMany({where: {name: req.body.name}});
 
-        if(gameSameName[0]) //Erreur Le jeu à le meme nom
+        if(gameSameName[0]) //Erreur un jeu a le meme nom
         {
             isError = true;
             const nameError = "Le nom du jeu existe déjà";
@@ -121,7 +124,7 @@ app.post("/addGame", async (req, res) => {  //recois le form
     {
         isError = true;
         console.error("Erreur dans l'ajout du jeu", err)
-        const nameError = "Une erreur serveur a été detecté";
+        const nameError = "Une erreur serveur a été detecté pour ajouter le jeu";
         res.render("Game/error", {
             nameError
         });
@@ -129,16 +132,25 @@ app.post("/addGame", async (req, res) => {  //recois le form
 
     if (!isError) //Si il y a eu une erreur
     {
-        res.redirect("/Game");
+        res.statuts(200).redirect("/Game");
     }
 });
 
-app.post("/suppressGame", async (req, res) => {
+app.get("/editGame", async (req, res) => {
+    const category = await prisma.Category.findMany();
+    const editor = await prisma.Editor.findMany();
+    res.render("Game/editGame", {
+        category,
+        editor
+    });
+});
+
+app.post("/editGame", async (req, res) => {
 
     res.send();
 })
 
-app.post("/editGame", async (req, res) => {
+app.post("/suppressGame", async (req, res) => {
 
     res.send();
 })
@@ -162,8 +174,10 @@ app.get("/Editor/:name", async (req, res) => {  //Prends les pages par editeur g
             gameOfEditor
         });
     }
-    else //sinon affiche blanc
-    {res.send()}
+    else //sinon affiche 404
+    {
+        res.render("404");
+    }
 });
 
 app.get("/addEditor", (req, res) => {
@@ -177,7 +191,7 @@ app.post("/addEditor", async (req, res) => {  //recois le form
     {
         const editorSameName = await prisma.Editor.findMany({where: {name: req.body.name}});
 
-        if(editorSameName[0]) //Erreur Le jeu à le meme nom
+        if(editorSameName[0]) //Erreur un éditeur a déjà ce nom
         {
             isError = true;
             const nameError = "L'éditeur existe déjà";
@@ -195,7 +209,7 @@ app.post("/addEditor", async (req, res) => {  //recois le form
     {
         isError = true;
         console.error("Erreur dans l'ajout de l'éditeur", err)
-        const nameError = "Une erreur serveur a été detecté";
+        const nameError = "Une erreur serveur a été detecté pour ajouter l'éditeur";
         res.render("Editor/error", {
             nameError
         });
@@ -206,6 +220,64 @@ app.post("/addEditor", async (req, res) => {  //recois le form
         res.redirect("/Editor");
     }
 });
+
+app.get("/editEditor/:name", async (req, res) => {
+    const editor = await prisma.Editor.findMany({where: {name: req.params.name} });
+    res.render("Editor/editEditor",{editor});
+});
+
+app.post("/editEditor/:name", async (req, res) => {  //recois le form
+
+    let isError = false;
+    try
+    {
+        const editorSameName = await prisma.Editor.findMany({where: {name: req.body.name}});
+
+        if(editorSameName[0]) //Erreur un éditeur a déjà ce nom
+        {
+            isError = true;
+            const nameError = "L'éditeur existe déjà";
+            res.render("Editor/error", {
+                nameError
+            });
+        }
+        else //sinon implementation db
+        {
+            utils.editEditor(req.body,req.params.name);
+            console.log("Pas de problème rencontrer");
+        }
+    }
+    catch(err) //Si le try a planté
+    {
+        isError = true;
+        console.error("Erreur dans la modification de l'éditeur", err)
+        const nameError = "Une erreur serveur a été detecté pour modifier l'éditeur";
+        res.render("Editor/error", {
+            nameError
+        });
+    }
+
+    if (!isError) //Si il y a eu une erreur
+    {
+        res.statuts(200).redirect("/Editor");
+    }
+});
+
+app.get("/suppressEditor/:name", async (req, res) => {
+    try
+    {
+        utils.suppressEditor(req.params.name);
+        res.status(200).redirect("/Editor");
+    }
+    catch (error)
+    {
+        console.error(error);
+        const nameError = "Une erreur serveur a été detecté pour supprimer l'éditeur";
+        res.status(500).render("/Editor/", {
+            nameError
+        })
+    }
+})
 
 //Handicapy
 //Vous aimez les capybaras ? Oui, alors ce jeu est fait pour vous ! Dans Handicapy vous incarnez un capybara, votre but est d'aider des capybara handicapé et de combattre des prédateurs pour avancer dans le jeu !
