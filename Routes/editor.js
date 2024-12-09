@@ -2,12 +2,16 @@ express = require("express")
 router = express.Router();
 const utils = require("../utils.js"); //import local des fonctions js
 
+
+
 router.get("/Editor", async (req, res) => {
     const editor = await prisma.Editor.findMany();
     res.render("Editor/indexEditor", {
         editor,
     });
 });
+
+
 
 router.get("/Editor/:name", async (req, res) => {  //Prends les pages par editeur grâce à *
     const editor = await prisma.Editor.findMany({where: {name: req.params.name} });
@@ -25,9 +29,13 @@ router.get("/Editor/:name", async (req, res) => {  //Prends les pages par editeu
     }
 });
 
+
+
 router.get("/addEditor", (req, res) => {
     res.render("Editor/addEditor",{});
 });
+
+
 
 router.post("/addEditor", async (req, res) => {  //recois le form
 
@@ -66,10 +74,14 @@ router.post("/addEditor", async (req, res) => {  //recois le form
     }
 });
 
+
+
 router.get("/editEditor/:name", async (req, res) => {
     const editor = await prisma.Editor.findMany({where: {name: req.params.name} });
     res.render("Editor/editEditor",{editor});
 });
+
+
 
 router.post("/editEditor/:name", async (req, res) => {  //recois le form
 
@@ -107,6 +119,8 @@ router.post("/editEditor/:name", async (req, res) => {  //recois le form
         res.redirect("/Editor");
     }
 });
+
+
 
 router.get("/suppressEditor/:name", async (req, res) => {
     try

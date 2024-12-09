@@ -2,12 +2,14 @@ express = require("express")
 router = express.Router();
 const utils = require("../utils.js"); //import local des fonctions js
 
+
 router.get("/Game", async (req, res) => {
     const game = await prisma.Game.findMany();
     res.render("Game/indexGame", {
         game,
     });
 });
+
 
 router.get("/Game/:name", async (req, res) => {  //Prends les pages par jeu grâce à *
 
@@ -29,6 +31,8 @@ router.get("/Game/:name", async (req, res) => {  //Prends les pages par jeu grâ
     }
 });
 
+
+
 router.get("/addGame", async (req, res) => {
     const category = await prisma.Category.findMany();
     const editor = await prisma.Editor.findMany();
@@ -37,6 +41,8 @@ router.get("/addGame", async (req, res) => {
         editor
     });
 });
+
+
 
 router.post("/addGame", async (req, res) => {  //recois le form
 
@@ -75,6 +81,8 @@ router.post("/addGame", async (req, res) => {  //recois le form
     }
 });
 
+
+
 router.get("/editGame", async (req, res) => {
     const category = await prisma.Category.findMany();
     const editor = await prisma.Editor.findMany();
@@ -83,6 +91,8 @@ router.get("/editGame", async (req, res) => {
         editor
     });
 });
+
+
 
 router.post("/editGame", async (req, res) => {
 

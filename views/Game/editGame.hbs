@@ -1,11 +1,19 @@
 <form id="editGameForm" method="post">
-    <input type="text" name="name" placeholder="Nom du jeu" required />
-    <input type="text" name="description" placeholder="Description du Jeu" required />
+    
+{{#each game}}
+    <input type="text" name="name" value="{{name}}" required />
+{{/each}}
 
-    <label for="category">Choisir la categorie:</label> 
+{{#each game}}
+    <input type="text" name="description" value="{{description}}" required />
+{{/each}}
+
+    <label for="category">Choisir la categorie:</label>
     <select name="category">
         {{#each category}}
-            <option id="{{id}}">{{name}}</option>
+            {{#ifCond id != 1}}
+                <option id="{{id}}">{{name}}</option>
+            {{/ifCond}}
         {{/each}}
     </select>
 

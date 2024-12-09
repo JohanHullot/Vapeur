@@ -5,7 +5,9 @@
     <label for="category">Choisir la categorie:</label> 
     <select name="category">
         {{#each category}}
-            <option id="{{id}}">{{name}}</option>
+            {{#if id '==' 1}}
+                <option id="{{id}}">{{name}}</option>
+            {{/if}}
         {{/each}}
     </select>
 
