@@ -5,10 +5,6 @@ const hbs = require("hbs");
 const path = require("path");
 const { console } = require("inspector"); //import le console pour log
 
-//Creation de helper
-hbs.handlebars.registerHelper('tryCate', function (category, game) {
-    return {name : prout};
-});
 
 //Routes local
 const editorRouter = require("./Routes/editor.js");

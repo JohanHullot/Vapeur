@@ -99,6 +99,14 @@ module.exports = {
         });
     },
 
+    suppressGame: async function (currentName)
+    {   //Supprime l'éditeur donné
+
+        const suprgame = await prisma.Game.delete({ //Creation de la catégorie dans la db
+            where: { name: currentName }
+        });
+    },
+
 
     //EDITOR
     addEditor: async function (data) 

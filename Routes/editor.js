@@ -100,7 +100,7 @@ router.post("/editEditor/:name", async (req, res) => {  //recois le form
         }
         else //sinon implementation db
         {
-            utils.editEditor(req.body,req.params.name);
+            utils.editEditor(req.body,req.body.name);
             console.log("Pas de problème rencontrer");
         }
     }
@@ -125,16 +125,39 @@ router.post("/editEditor/:name", async (req, res) => {  //recois le form
 router.get("/suppressEditor/:name", async (req, res) => {
     try
     {
-        utils.suppressEditor(req.params.name);
-        res.redirect("/Editor");
+        const editor = await prisma.Editor.findMany({where: {name: req.params.name} });
+        console.log(req.params.name);
+        if (editor[0])
+        {
+            console.log(editor[0].id)
+            const game = await prisma.Game.findMany({where: {gameEditor: editor[0].id}});
+
+
+            if (game[0])//si l'éditeur a un jeu
+            {
+                const nameError = "Cet éditeur a créé des jeux et les a mis dans Vapeur, il ne peut pas être supprimé";
+                res.render("Editor/error", {
+                    nameError
+                });
+            }
+            else
+            {
+                utils.suppressEditor(req.params.name);
+                res.redirect("/Editor");
+            }
+        }
+        else  //si l'editeur n'existe pas
+        {
+            res.redirect("/Editor");
+        }
     }
     catch (error)
     {
         console.error(error);
         const nameError = "Une erreur serveur a été detecté pour supprimer l'éditeur";
-        res.render("/Editor/", {
+        res.render("/Editor/error", {
             nameError
-        })
+        });
     }
 })
 

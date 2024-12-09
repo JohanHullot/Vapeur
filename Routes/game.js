@@ -134,9 +134,23 @@ router.post("/editGame/:name", async (req, res) => {
 })
 
 
-router.post("/suppressGame/:name", async (req, res) => {
+router.get("/suppressGame/:name", async (req, res) => {
 
-    res.send();
+    try
+    {
+        utils.suppressGame(req.params.name);
+        console.log("Pas de problème rencontrer");
+        res.redirect("/Game");
+    }
+    catch(err) //Si le try a planté
+    {
+        isError = true;
+        console.error("Erreur dans la suppression du jeu", err)
+        const nameError = "Une erreur serveur a été detecté pour supprimer le jeu";
+        res.render("Game/error", {
+            nameError
+        });
+    }
 })
 
 module.exports = router; //export to serv.js
