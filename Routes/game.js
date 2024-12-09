@@ -83,10 +83,12 @@ router.post("/addGame", async (req, res) => {  //recois le form
 
 
 
-router.get("/editGame", async (req, res) => {
+router.get("/editGame/:name", async (req, res) => {
+    const game = await prisma.Game.findMany({where: {name: req.params.name} });
     const category = await prisma.Category.findMany();
     const editor = await prisma.Editor.findMany();
     res.render("Game/editGame", {
+        game,
         category,
         editor
     });
@@ -94,12 +96,45 @@ router.get("/editGame", async (req, res) => {
 
 
 
-router.post("/editGame", async (req, res) => {
+router.post("/editGame/:name", async (req, res) => {
 
-    res.send();
+    let isError = false;
+    try
+    {
+        const gameSameName = await prisma.Game.findMany({where: {name: req.body.name}});
+
+        if(gameSameName[0]) //Erreur un jeu a le meme nom
+        {
+            isError = true;
+            const nameError = "Le nom du jeu existe déjà";
+            res.render("Game/error", {
+                nameError
+            });
+        }
+        else //sinon implementation db
+        {
+            utils.editGame(req.body, req.params.name);
+            console.log("Pas de problème rencontrer");
+        }
+    }
+    catch(err) //Si le try a planté
+    {
+        isError = true;
+        console.error("Erreur dans la modification du jeu", err)
+        const nameError = "Une erreur serveur a été detecté pour modifier le jeu";
+        res.render("Game/error", {
+            nameError
+        });
+    }
+
+    if (!isError) //Si il y a eu une erreur
+    {
+        res.redirect("/Game");
+    }
 })
 
-router.post("/suppressGame", async (req, res) => {
+
+router.post("/suppressGame/:name", async (req, res) => {
 
     res.send();
 })

@@ -1,20 +1,17 @@
 <form id="editGameForm" method="post">
     
-{{#each game}}
-    <input type="text" name="name" value="{{name}}" required />
-{{/each}}
-
-{{#each game}}
-    <input type="text" name="description" value="{{description}}" required />
-{{/each}}
+    {{#each game}}
+        <input type="text" name="name" value="{{name}}" required />
+        <input type="text" name="description" value="{{description}}" required />
+    {{/each}}
 
     <label for="category">Choisir la categorie:</label>
     <select name="category">
-        {{#each category}}
-            {{#ifCond id != 1}}
-                <option id="{{id}}">{{name}}</option>
-            {{/ifCond}}
-        {{/each}}
+
+    {{#each category}}
+        <option id="{{id}}">{{name}}</option>
+    {{/each}}
+        
     </select>
 
     <label for="editor">Choisir l'éditeur:</label>
@@ -25,5 +22,5 @@
     </select>
 
     <input type="file" name="inputForPicture" value="Deposer la photo"/>
-    <input type="submit" value="Ajouter le jeu à Vapeur"/>
+    <input type="submit" value="Mettre à jour le jeu dans Vapeur"/>
 </form>

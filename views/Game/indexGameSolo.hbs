@@ -1,21 +1,21 @@
-    {{#each game}}
+{{#each game}}
     <h2>{{name}}</h2>
     <p>{{description}}</p>
     <p>{{publishDate}}</p>
-    {{/each}}
-    {{#each categoryOfGame}}
-    <a href="../Category/{{name}}">{{name}}</a>
-    {{/each}}
-    {{#each editorOfGame}}
-    <a href="../Editor/{{name}}">{{name}}</a>
-    {{/each}}
+{{/each}}
 
-    <form action="../editGame" id="editGameForm" method="post">
-            <input type="submit" value="Editer"/>
-    </form>
-    <form action="../suppressGame" id="supressGameForm" method="post">
-            <input type="submit" value="Supprimer"/>
-    </form>
+{{#each categoryOfGame}}
+    <a href="../Category/{{name}}">{{name}}</a>
+{{/each}}
+
+{{#each editorOfGame}}
+    <a href="../Editor/{{name}}">{{name}}</a>
+{{/each}}
+
+{{#each game}}
+    <a href="../editGame/{{name}}">Modifier le jeu</a>
+    <a href="../suppressGame/{{name}}">Supprimer le jeu</a>
+{{/each}}
     
 <a href="./">Retour à la page des jeux</a>
 <a href="../">Retour à la page principale</a>

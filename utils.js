@@ -81,7 +81,7 @@ module.exports = {
         //console.log(newgame);
     },
 
-    editGame: async function (data) 
+    editGame: async function (data, currentName) 
     {    //Modifie le jeu souhaité dans la base de donnée
         const idEditor = await prisma.Editor.findMany({where: {name: data.editor}});
         const idCategory = await prisma.Category.findMany({where: {name: data.category}});
@@ -94,7 +94,8 @@ module.exports = {
         }
 
         const newgame = await prisma.Game.update({ //Creation de la catégorie dans la db
-            data: game,
+            where: { name: currentName },
+            data: game
         });
     },
 

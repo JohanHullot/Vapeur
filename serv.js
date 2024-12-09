@@ -5,33 +5,9 @@ const hbs = require("hbs");
 const path = require("path");
 const { console } = require("inspector"); //import le console pour log
 
-
-hbs.handlebars.registerHelper('if', function (v1, operator, v2, options) {
-
-    switch (operator) {
-        case '==':
-            return (v1 == v2) ? options.fn(this) : options.inverse(this);
-        case '===':
-            return (v1 === v2) ? options.fn(this) : options.inverse(this);
-        case '!=':
-            return (v1 != v2) ? options.fn(this) : options.inverse(this);
-        case '!==':
-            return (v1 !== v2) ? options.fn(this) : options.inverse(this);
-        case '<':
-            return (v1 < v2) ? options.fn(this) : options.inverse(this);
-        case '<=':
-            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-        case '>':
-            return (v1 > v2) ? options.fn(this) : options.inverse(this);
-        case '>=':
-            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-        case '&&':
-            return (v1 && v2) ? options.fn(this) : options.inverse(this);
-        case '||':
-            return (v1 || v2) ? options.fn(this) : options.inverse(this);
-        default:
-            return options.inverse(this);
-    }
+//Creation de helper
+hbs.handlebars.registerHelper('tryCate', function (category, game) {
+    return {name : prout};
 });
 
 //Routes local
