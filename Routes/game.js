@@ -77,7 +77,7 @@ router.post("/addGame", async (req, res) => {  //recois le form
 
     if (!isError) //Si il y a eu une erreur
     {
-        res.redirect("/Game");
+        res.redirect("/Game/" + req.body.name);
     }
 });
 
@@ -129,7 +129,7 @@ router.post("/editGame/:name", async (req, res) => {
 
     if (!isError) //Si il y a eu une erreur
     {
-        res.redirect("/Game" + req.params.name);
+        res.redirect("/Game/" + req.params.name);
     }
 })
 

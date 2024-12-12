@@ -159,7 +159,7 @@ module.exports = {
 
         const updateditor = await prisma.Editor.update({ //Modification de l'editeur dans la db
             where: { name: currentName },
-            data: editor
+            data: editor,
         });
     },
 

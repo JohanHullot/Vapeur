@@ -50,9 +50,6 @@ app.use(gameRouter); //Routes game
 //EDITOR
 app.use(editorRouter); //Routes editor
 
-//Handicapy
-//Vous aimez les capybaras ? Oui, alors ce jeu est fait pour vous ! Dans Handicapy vous incarnez un capybara, votre but est d'aider des capybara handicapé et de combattre des prédateurs pour avancer dans le jeu !
-
 //Connexion au Port 3015
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

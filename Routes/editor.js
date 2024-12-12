@@ -70,7 +70,7 @@ router.post("/addEditor", async (req, res) => {  //recois le form
 
     if (!isError) //Si il y a eu une erreur
     {
-        res.redirect("/Editor");
+        res.redirect("/Editor/" + req.body.name);
     }
 });
 
@@ -100,7 +100,7 @@ router.post("/editEditor/:name", async (req, res) => {  //recois le form
         }
         else //sinon implementation db
         {
-            utils.editEditor(req.body,req.body.name);
+            utils.editEditor(req.body,req.params.name);
             console.log("Pas de problème rencontrer");
         }
     }
@@ -116,7 +116,7 @@ router.post("/editEditor/:name", async (req, res) => {  //recois le form
 
     if (!isError) //Si il y a eu une erreur
     {
-        res.redirect("/Editor");
+        res.redirect("/Editor/" + req.body.name);
     }
 });
 
