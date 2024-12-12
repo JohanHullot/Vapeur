@@ -103,7 +103,7 @@ router.post("/editGame/:name", async (req, res) => {
     {
         const gameSameName = await prisma.Game.findMany({where: {name: req.body.name}});
 
-        if(gameSameName[0]) //Erreur un jeu a le meme nom
+        if(gameSameName[0] && gameSameName[0].name != req.params.name) //Si un autre jeu que lui à le même nom 
         {
             isError = true;
             const nameError = "Le nom du jeu existe déjà";

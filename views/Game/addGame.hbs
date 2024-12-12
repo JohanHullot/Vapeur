@@ -1,7 +1,8 @@
 <form id="addGameForm" method="post">
     <input type="text" name="name" placeholder="Nom du jeu" required />
     <input type="text" name="description" placeholder="Description du Jeu" required />
-
+    <input type="datetime-local" name="date" required/>
+    
     <label for="category">Choisir la categorie:</label> 
     <select name="category">
         {{#each category}}
@@ -15,6 +16,8 @@
             <option id="{{id}}">{{name}}</option>
         {{/each}}
     </select>
+
+
 
     <input type="file" name="inputForPicture" value="Deposer la photo"/>
     <input type="submit" value="Ajouter le jeu à Vapeur"/>

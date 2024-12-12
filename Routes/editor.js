@@ -90,7 +90,7 @@ router.post("/editEditor/:name", async (req, res) => {  //recois le form
     {
         const editorSameName = await prisma.Editor.findMany({where: {name: req.body.name}});
 
-        if(editorSameName[0]) //Erreur un éditeur a déjà ce nom
+        if(editorSameName[0] && editorSameName[0].name != req.params.name) //Erreur un éditeur a déjà ce nom
         {
             isError = true;
             const nameError = "L'éditeur existe déjà";

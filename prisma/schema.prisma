@@ -29,7 +29,7 @@ model Game {
   id          Int      @id @default(autoincrement())
   name        String   @unique
   description String
-  publishDate DateTime @default(now())
+  publishDate DateTime 
 
   category Category @relation(fields: [gameCategory], references: [id]) // relie Game à Categorie
   gameCategory Int

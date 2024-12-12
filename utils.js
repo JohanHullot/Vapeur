@@ -68,11 +68,13 @@ module.exports = {
         const idEditor = await prisma.Editor.findMany({where: {name: data.editor}});
         const idCategory = await prisma.Category.findMany({where: {name: data.category}});
         
+
         const game = {
             name: data.name,
             gameCategory: idCategory[0].id,
             gameEditor: idEditor[0].id,
-            description: data.description
+            description: data.description,
+            publishDate: data.date + ":00.000Z"
         }
 
         const newgame = await prisma.Game.create({ //Creation de la catégorie dans la db
@@ -90,7 +92,8 @@ module.exports = {
             name: data.name,
             gameCategory: idCategory[0].id,
             gameEditor: idEditor[0].id,
-            description: data.description
+            description: data.description,
+            publishDate: data.date + ":00.000Z"
         }
 
         const newgame = await prisma.Game.update({ //Creation de la catégorie dans la db
