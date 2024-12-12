@@ -2,10 +2,24 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="/style.css" />
     </head>
     <body>
         {{>header}}
-        {{{ body }}}
+        <div id="majorBody">
+            <div id="divNavigateLink"> 
+                
+                <p id="navigateLink"><a href="/Game">Les Jeux</a></p>
+                    
+                <p id="navigateLink"><a href="/Category">Les Catégories</a></p>
+              
+                <p id="navigateLink"><a href="/Editor">Les Editeurs</a></p>
+       
+            </div>
+            <div id="bodyContent">
+                {{{ body }}}
+            </div>
+
+        </div>
     </body>
 </html>
