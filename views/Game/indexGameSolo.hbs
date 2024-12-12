@@ -5,17 +5,33 @@
 {{/each}}
 
 {{#each categoryOfGame}}
+<p>Catégorie :
     <a href="../Category/{{name}}">{{name}}</a>
+</p>
 {{/each}}
 
 {{#each editorOfGame}}
+<p>Editeur : 
     <a href="../Editor/{{name}}">{{name}}</a>
+</p>
 {{/each}}
 
 {{#each game}}
+<li>
     <a href="../editGame/{{name}}">Modifier le jeu</a>
+</li>
+<li>
     <a href="../suppressGame/{{name}}">Supprimer le jeu</a>
+</li>
+
+<li>
+{{#if inMainPage}}
+    <a href="../setOff/{{name}}">Enlever le jeu de la une !</a>
+{{else}}
+   <a href="../setOn/{{name}}">Mettre le jeu à la une !</a>
+{{/if}}
+</li><br/>
 {{/each}}
     
-<a href="./">Retour à la page des jeux</a>
+<a href="./">Retour à la page des jeux</a><br/>
 <a href="../">Retour à la page principale</a>

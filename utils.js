@@ -20,7 +20,7 @@ module.exports = {
     //     }
     // },
 
-    // createGameDefault: async function () //creer les catégories demandé dans la db
+    // createGameDefault: async function () //creer les jeux demandé dans la db
     // {
     //     const tabGame = [["Faster Than Light",4,3,"Ce jeu de simulation spatiale de type rogue-like vous permet de piloter votre vaisseau dans une galaxie générée aléatoirement où vous pourrez vous couvrir de gloire... si vous parvenez à éviter la défaite."],
     //                      ["Into the Breach",1,3,"Contrôlez de puissants Mechas venus du futur pour vaincre une terrible menace extraterrestre. Chaque tentative faite pour sauver le monde est un nouveau défi généré aléatoirement dans ce jeu de stratégie au tour par tour."],
@@ -36,14 +36,14 @@ module.exports = {
     //         gameEditor: tabGame[indice][2],
     //         description: tabGame[indice][3]
     //         };
-    //         const newgame = await prisma.Game.create({ //Creation de la catégorie dans la db
+    //         const newgame = await prisma.Game.create({ //Creation des jeux dans la db
     //             data: game,
     //         });
     //         console.log(tabGame[indice]);
     //     }
     // },
 
-    // createEditorDefault: async function () //creer les catégories demandé dans la db
+    // createEditorDefault: async function () //creer les editeurs demandé dans la db
     // {
     //     const tabEditor = ["Blobfish",
     //                        "Dani",
@@ -55,7 +55,7 @@ module.exports = {
     //         const editor = {
     //         name: tabEditor[indice],
     //         };
-    //         const neweditor = await prisma.Editor.create({ //Creation de la catégorie dans la db
+    //         const neweditor = await prisma.Editor.create({ //Creation des editeurs dans la db
     //             data: editor,
     //         });
     //         console.log(tabEditor[indice]);
@@ -77,8 +77,8 @@ module.exports = {
             publishDate: data.date + ":00.000Z"
         }
 
-        const newgame = await prisma.Game.create({ //Creation de la catégorie dans la db
-            data: game,
+        const newgame = await prisma.Game.create({ //Creation du jeu dans la db
+            data: game
         });
         //console.log(newgame);
     },
@@ -96,7 +96,7 @@ module.exports = {
             publishDate: data.date + ":00.000Z"
         }
 
-        const newgame = await prisma.Game.update({ //Creation de la catégorie dans la db
+        const updategame = await prisma.Game.update({ //Modification du jeu dans la db
             where: { name: currentName },
             data: game
         });
@@ -105,21 +105,47 @@ module.exports = {
     suppressGame: async function (currentName)
     {   //Supprime l'éditeur donné
 
-        const suprgame = await prisma.Game.delete({ //Creation de la catégorie dans la db
+        const suprgame = await prisma.Game.delete({ //Suppression du jeu dans la db
             where: { name: currentName }
         });
     },
+
+    setOn: async function (nameGame)
+    {
+        const game = {
+            inMainPage: true
+        }
+
+        const updateGame = await prisma.Game.update({ //Modification pour mettre à la une
+            where: { name: nameGame },
+            data: game
+        });
+    },
+
+    setOff: async function (nameGame)
+    {
+        const game = {
+            inMainPage: false
+        }
+
+        const updateGame = await prisma.Game.update({ //Modification pour enlever de la une
+            where: { name: nameGame },
+            data: game
+        });
+    },
+
+
 
 
     //EDITOR
     addEditor: async function (data) 
     {    //Ajoute un nouvel éditeur à la base de donnée        
         const editor = {
-            name: data.name,
+            name: data.name
         }
 
-        const neweditor = await prisma.Editor.create({ //Creation de la catégorie dans la db
-            data: editor,
+        const neweditor = await prisma.Editor.create({ //Creation de l'editeur dans la db
+            data: editor
         });
         //console.log(neweditor);
     },
@@ -128,19 +154,19 @@ module.exports = {
     editEditor: async function (data,currentName) 
     {    //Modifie le jeu souhaité dans la base de donnée       
         const editor = {
-            name: data.name,
+            name: data.name
         }
 
-        const neweditor = await prisma.Editor.update({ //Creation de la catégorie dans la db
+        const updateditor = await prisma.Editor.update({ //Modification de l'editeur dans la db
             where: { name: currentName },
-            data: editor,
+            data: editor
         });
     },
 
     suppressEditor: async function (currentName)
     {   //Supprime l'éditeur donné
 
-        const supreditor = await prisma.Editor.delete({ //Creation de la catégorie dans la db
+        const supreditor = await prisma.Editor.delete({ //Suppression de l'editeur dans la db
             where: { name: currentName }
         });
     }

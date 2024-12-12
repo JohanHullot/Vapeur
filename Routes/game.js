@@ -129,7 +129,7 @@ router.post("/editGame/:name", async (req, res) => {
 
     if (!isError) //Si il y a eu une erreur
     {
-        res.redirect("/Game");
+        res.redirect("/Game" + req.params.name);
     }
 })
 
@@ -151,6 +151,16 @@ router.get("/suppressGame/:name", async (req, res) => {
             nameError
         });
     }
+})
+
+router.get("/setOn/:name", async (req, res) => { //Mettre un jeu à la une
+    utils.setOn(req.params.name);
+    res.redirect("/Game/" + req.params.name);
+})
+
+router.get("/setOff/:name", async (req, res) => { //L'enlève de la une
+    utils.setOff(req.params.name);
+    res.redirect("/Game/" + req.params.name);
 })
 
 module.exports = router; //export to serv.js

@@ -30,6 +30,7 @@ model Game {
   name        String   @unique
   description String
   publishDate DateTime 
+  inMainPage  Boolean   @default(false)
 
   category Category @relation(fields: [gameCategory], references: [id]) // relie Game à Categorie
   gameCategory Int

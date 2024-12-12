@@ -11,7 +11,7 @@ const editorRouter = require("./Routes/editor.js");
 const gameRouter  = require("./Routes/game.js");
 const categoryRouter  = require("./Routes/category.js");
 
-//
+
 //Preparation des modules
 app = express();
 prisma = new PrismaClient();
@@ -33,10 +33,10 @@ app.get("/", async (req, res) =>
     //utils.createEditorDefault();
     //utils.createGameDefault();
 
-    const category = await prisma.Category.findMany(); //Trouve tout les jeux de la base de donnees
+    const game = await prisma.Game.findMany({where: {inMainPage: true}}); //Trouve tout les jeux de la base de donnees
 
     res.render("index",{    //index.hbs est afficher sur le site
-        category,
+        game,
     });
 })
 
@@ -57,3 +57,17 @@ app.use(editorRouter); //Routes editor
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+
+
+
+// const multer = require('multer');
+
+// const upload = multer({ dest: 'uploads/' }); // dossier de stockage des images
+
+// app.post('/upload', upload.single('image'), (req, res) => {
+//   const imageBuffer = req.file.buffer;
+//   // Enregistrer le Buffer dans la base de données
+//   // ...
+//   res.send('Image uploaded successfully!');
+// });
