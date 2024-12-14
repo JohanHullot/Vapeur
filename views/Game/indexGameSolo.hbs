@@ -1,8 +1,20 @@
 {{#each game}}
     <h2>{{name}}</h2>
-    <p>{{description}}</p>
-    <p>{{publishDate}}</p>
+    <div id="presGame">
+        <div>
+            <p>{{description}}</p>
+            <p>{{publishDate}}</p>
+        </div>
+
+    {{#if nameOfImage}}
+        <div id="image">
+            <img src="../../uploads/{{nameOfImage}}" title="{{nameOfImage}}">
+        </div>
+    {{/if}}
+    </div>
+
 {{/each}}
+
 
 {{#each categoryOfGame}}
 <p>Catégorie :
@@ -25,6 +37,7 @@
 </li>
 
 <li>
+    
 {{#if inMainPage}}
     <a href="../setOff/{{name}}">Enlever le jeu de la une !</a>
 {{else}}
@@ -32,6 +45,7 @@
 {{/if}}
 </li><br/>
 {{/each}}
+
     
 <a href="./">Retour à la page des jeux</a><br/>
 <a href="../">Retour à la page principale</a>

@@ -1,9 +1,10 @@
+//Importation
 express = require("express")
 router = express.Router();
-const utils = require("../utils.js"); //import local des fonctions js
+const utils = require("../utils.js");
 
 
-
+//Routes
 router.get("/Editor", async (req, res) => {
     const editor = await prisma.Editor.findMany();
     res.render("Editor/indexEditor", {

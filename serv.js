@@ -6,6 +6,7 @@ const path = require("path");
 const { console } = require("inspector"); //import le console pour log
 
 
+
 //Routes local
 const editorRouter = require("./Routes/editor.js");
 const gameRouter  = require("./Routes/game.js");
@@ -21,9 +22,12 @@ hbs.registerPartials(path.join(__dirname, "/views/partials")); //Donne les chemi
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views")); //Donne le chemin des views que va utiliser app
 
-app.use(express.static("public")); //Fichier de /public/ deviennent visible pour toutes les routes
-
 app.use(express.urlencoded({ extended: true })); // permet de recevoir les posts des forms
+
+//Fichier Public
+app.use(express.static("public"));
+app.use('/uploads', express.static('uploads'));
+
 
 //Routes
 

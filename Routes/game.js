@@ -1,8 +1,14 @@
+//Importation
 express = require("express")
 router = express.Router();
-const utils = require("../utils.js"); //import local des fonctions js
+const utils = require("../utils.js");
+
+//mise en place du stockage d'image
+const stockage = require("../storageImage.js")
+const upload = stockage.compilStorage();
 
 
+//Routes
 router.get("/Game", async (req, res) => {
     const game = await prisma.Game.findMany();
     res.render("Game/indexGame", {
@@ -44,7 +50,7 @@ router.get("/addGame", async (req, res) => {
 
 
 
-router.post("/addGame", async (req, res) => {  //recois le form
+router.post("/addGame", upload.single('picture'), async (req, res) => {  //recois le form
 
     let isError = false;
     try
@@ -61,8 +67,12 @@ router.post("/addGame", async (req, res) => {  //recois le form
         }
         else //sinon implementation db
         {
-            utils.addGame(req.body);
-            console.log("Pas de problème rencontrer");
+            let nameImage = "";//default No Image
+            if (req.file)
+                nameImage = req.file.originalname;
+
+            utils.addGame(req.body, nameImage);
+            //console.log("Pas de problème rencontrer");
         }
     }
     catch(err) //Si le try a planté
@@ -96,9 +106,9 @@ router.get("/editGame/:name", async (req, res) => {
 
 
 
-router.post("/editGame/:name", async (req, res) => {
+router.post("/editGame/:name", upload.single('picture'), async (req, res) => {
 
-    console.log(req.body.inputForPicture);
+    // console.log(req.file, req.body)
     let isError = false;
     try
     {
@@ -114,7 +124,11 @@ router.post("/editGame/:name", async (req, res) => {
         }
         else //sinon implementation db
         {
-            utils.editGame(req.body, req.params.name);
+            let nameImage = "";//default No Image
+            if (req.file)
+                nameImage = req.file.originalname;
+
+            utils.editGame(req.body, req.params.name, nameImage);
             console.log("Pas de problème rencontrer");
         }
     }

@@ -1,6 +1,5 @@
-{{!-- <script src="/recupImage.js" defer></script> --}}
 
-<form id="editGameForm" method="post">
+<form id="editGameForm" method="post" enctype="multipart/form-data"> {{!-- enctype pour uplaod les photos --}}
     
     {{#each game}}
         <input type="text" name="name" value="{{name}}" required />
@@ -24,6 +23,6 @@
         {{/each}}
     </select>
 
-    <input type="file" id="inputForPicture" name="inputForPicture" value="Deposer la photo" accept=".jpg, .jpeg, .png"/>
+    <input type="file" name="picture" accept=".jpg, .jpeg, .png, .gif"/>
     <input type="submit" value="Mettre à jour le jeu dans Vapeur"/>
 </form>
