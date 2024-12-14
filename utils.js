@@ -63,7 +63,7 @@ module.exports = {
     // },
 
     //GAME
-    addGame: async function (data) 
+    addGame: async function (data, namePicture) 
     {    //Ajoute un nouveau jeu à la base de donnée
         const idEditor = await prisma.Editor.findMany({where: {name: data.editor}});
         const idCategory = await prisma.Category.findMany({where: {name: data.category}});
@@ -74,7 +74,8 @@ module.exports = {
             gameCategory: idCategory[0].id,
             gameEditor: idEditor[0].id,
             description: data.description,
-            publishDate: data.date + ":00.000Z"
+            publishDate: data.date + ":00.000Z",
+            nameOfImage: namePicture
         }
 
         const newgame = await prisma.Game.create({ //Creation du jeu dans la db
@@ -83,7 +84,7 @@ module.exports = {
         //console.log(newgame);
     },
 
-    editGame: async function (data, currentName) 
+    editGame: async function (data, currentName, namePicture) 
     {    //Modifie le jeu souhaité dans la base de donnée
         const idEditor = await prisma.Editor.findMany({where: {name: data.editor}});
         const idCategory = await prisma.Category.findMany({where: {name: data.category}});
@@ -93,7 +94,8 @@ module.exports = {
             gameCategory: idCategory[0].id,
             gameEditor: idEditor[0].id,
             description: data.description,
-            publishDate: data.date + ":00.000Z"
+            publishDate: data.date + ":00.000Z",
+            nameOfImage: namePicture
         }
 
         const updategame = await prisma.Game.update({ //Modification du jeu dans la db
