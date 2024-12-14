@@ -6,7 +6,6 @@ const path = require("path");
 const { console } = require("inspector"); //import le console pour log
 
 
-
 //Routes local
 const editorRouter = require("./Routes/editor.js");
 const gameRouter  = require("./Routes/game.js");
@@ -46,7 +45,7 @@ app.get("/", async (req, res) =>
 
 
 //CATEGORY
-app.use(categoryRouter);
+app.use(categoryRouter); //Routes category
 
 //GAME
 app.use(gameRouter); //Routes game
@@ -58,17 +57,3 @@ app.use(editorRouter); //Routes editor
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-
-
-
-// const multer = require('multer');
-
-// const upload = multer({ dest: 'uploads/' }); // dossier de stockage des images
-
-// app.post('/upload', upload.single('image'), (req, res) => {
-//   const imageBuffer = req.file.buffer;
-//   // Enregistrer le Buffer dans la base de données
-//   // ...
-//   res.send('Image uploaded successfully!');
-// });
