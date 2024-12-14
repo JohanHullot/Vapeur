@@ -98,6 +98,7 @@ router.get("/editGame/:name", async (req, res) => {
 
 router.post("/editGame/:name", async (req, res) => {
 
+    console.log(req.body.inputForPicture);
     let isError = false;
     try
     {
