@@ -10,7 +10,7 @@ const upload = stockage.compilStorage();
 
 //Routes
 router.get("/Game", async (req, res) => {
-    const game = await prisma.Game.findMany();
+    const game = await prisma.Game.findMany({orderBy: { name: "asc"}});
     res.render("Game/indexGame", {
         game,
     });
@@ -19,7 +19,7 @@ router.get("/Game", async (req, res) => {
 
 router.get("/Game/:name", async (req, res) => {  //Prends les pages par jeu grâce à *
 
-    const game = await prisma.Game.findMany({where: {name: req.params.name} });
+    const game = await prisma.Game.findMany({where: {name: req.params.name}, orderBy: { name: "asc"} });
 
     if (game[0]) //Si le jeu existe
     {

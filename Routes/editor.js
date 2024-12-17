@@ -6,7 +6,7 @@ const utils = require("../utils.js");
 
 //Routes
 router.get("/Editor", async (req, res) => {
-    const editor = await prisma.Editor.findMany();
+    const editor = await prisma.Editor.findMany({orderBy: { name: "asc"}});
     res.render("Editor/indexEditor", {
         editor,
     });
@@ -15,10 +15,10 @@ router.get("/Editor", async (req, res) => {
 
 
 router.get("/Editor/:name", async (req, res) => {  //Prends les pages par editeur grâce à *
-    const editor = await prisma.Editor.findMany({where: {name: req.params.name} });
+    const editor = await prisma.Editor.findMany({where: {name: req.params.name}, orderBy: { name: "asc"}});
     if (editor[0]) //Cela prends le document style quand je reviens sur toutes categories
     {   
-        const gameOfEditor = await prisma.Game.findMany({where: {gameEditor: editor[0].id} });
+        const gameOfEditor = await prisma.Game.findMany({where: {gameEditor: editor[0].id}, orderBy: { name: "asc"}});
         res.render("Editor/indexEditorSolo", {
             editor,
             gameOfEditor

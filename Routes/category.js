@@ -6,7 +6,7 @@ const utils = require("../utils.js");
 
 //Routes
 router.get("/Category", async (req, res) => {
-    const category = await prisma.Category.findMany();
+    const category = await prisma.Category.findMany({orderBy: { name: "asc"}});
     res.render("Category/indexCategory", {
         category,
     });
