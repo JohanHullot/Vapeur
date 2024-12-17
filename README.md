@@ -9,7 +9,7 @@ NodeJs
 
 # Utilisation
 
-- Cloner le dossier git
+- Ouvrez l'invite de commande pour cloner le dossier git tapez :
 ```bash
 git clone https://github.com/JohanHullot/Vapeur.git
 ```
@@ -17,3 +17,4 @@ git clone https://github.com/JohanHullot/Vapeur.git
 ```bash
 npm start
 ```
+- Le serveur en marche lancez l'url http://localhost:3015/ sur votre navigateur
