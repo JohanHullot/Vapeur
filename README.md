@@ -1,7 +1,7 @@
 # Vapeur
 
 Bienvenue sur Vapeur!!
-Mon site web qui répertorie n'importe quel jeux !
+Le site web qui répertorie n'importe quel jeux !
 
 
 # Requis
