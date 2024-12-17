@@ -1,50 +1,42 @@
-{{#each game}}
-    <h2>{{name}}</h2>
-    <div id="presGame">
-        <div>
-            <p>{{description}}</p>
-            <p>{{publishDate}}</p>
-        </div>
-
-    {{#if nameOfImage}}
-        <div id="image">
-            <img src="../../uploads/{{nameOfImage}}" title="{{nameOfImage}}">
-        </div>
-    {{/if}}
+<h2>{{game.name}}</h2>
+<div id="presGame">
+    <div>
+        <p>{{game.description}}</p>
+        <p>{{game.publishDate}}</p>
     </div>
 
-{{/each}}
+{{#if game.nameOfImage}}
+    <div id="image">
+        <img src="../../uploads/{{game.nameOfImage}}" title="{{game.nameOfImage}}">
+    </div>
+{{/if}}
+</div>
 
-
-{{#each categoryOfGame}}
 <p>Catégorie :
-    <a href="../Category/{{name}}">{{name}}</a>
+    <a href="../Category/{{categoryOfGame.name}}">{{categoryOfGame.name}}</a>
 </p>
-{{/each}}
 
-{{#each editorOfGame}}
+
 <p>Editeur : 
-    <a href="../Editor/{{name}}">{{name}}</a>
+    <a href="../Editor/{{editorOfGame.name}}">{{editorOfGame.name}}</a>
 </p>
-{{/each}}
 
-{{#each game}}
+
 <li>
-    <a href="../editGame/{{name}}">Modifier le jeu</a>
+    <a href="../editGame/{{game.name}}">Modifier le jeu</a>
 </li>
 <li>
-    <a href="../suppressGame/{{name}}">Supprimer le jeu</a>
+    <a href="../suppressGame/{{game.name}}">Supprimer le jeu</a>
 </li>
 
 <li>
     
 {{#if inMainPage}}
-    <a href="../setOff/{{name}}">Enlever le jeu de la une !</a>
+    <a href="../setOff/{{game.name}}">Enlever le jeu de la une !</a>
 {{else}}
-    <a href="../setOn/{{name}}">Mettre le jeu à la une !</a>
+    <a href="../setOn/{{game.name}}">Mettre le jeu à la une !</a>
 {{/if}}
 </li><br/>
-{{/each}}
 
     
 <a href="./">Retour à la page des jeux</a><br/>

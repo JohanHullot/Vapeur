@@ -15,18 +15,18 @@ router.get("/Category", async (req, res) => {
 
 router.get("/Category/:name", async (req, res) => {  //Prends les pages par categorie grâce à *
 
-    const category = await prisma.Category.findMany({where: {name: req.params.name} });
+    const category = await prisma.Category.findUnique({where: {name: req.params.name} });
 
-    if (category[0]) //Cela prends le document style quand je reviens sur toutes categories
+    if (category) //Cela prends le document style quand je reviens sur toutes categories
     {    
-        const gameOfCategory = await prisma.Game.findMany({where: {gameCategory: category[0].id} });
+        const gameOfCategory = await prisma.Game.findMany({where: {gameCategory: category.id} });
         res.render("Category/indexCategorySolo", {
             category,
             gameOfCategory
         });
     }
     else //sinon affiche blanc
-    {res.send()}
+    {res.render("404");}
 });
 
 module.exports = router; //export to serv.js

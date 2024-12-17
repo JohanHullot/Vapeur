@@ -1,10 +1,11 @@
-    {{#each category}}
-    <h2>{{name}}</h2>
-    {{/each}}
-    {{#each gameOfCategory}}
-        <li>
-            <a href="../Game/{{name}}">{{name}}</a>
-        </li>
-    {{/each}}
-<a href="./">Retour à la page des categories</a>
+<h2>{{category.name}}</h2>
+
+{{#each gameOfCategory}}
+    <li>
+        <a href="../Game/{{name}}">{{name}}</a>
+    </li>
+{{/each}}
+
+<br/>
+<a href="./">Retour à la page des categories</a><br/>
 <a href="../">Retour à la page principale</a>

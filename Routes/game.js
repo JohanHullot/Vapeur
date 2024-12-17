@@ -19,12 +19,12 @@ router.get("/Game", async (req, res) => {
 
 router.get("/Game/:name", async (req, res) => {  //Prends les pages par jeu grâce à *
 
-    const game = await prisma.Game.findMany({where: {name: req.params.name}, orderBy: { name: "asc"} });
+    const game = await prisma.Game.findUnique({where: {name: req.params.name}});
 
-    if (game[0]) //Si le jeu existe
+    if (game) //Si le jeu existe
     {
-        const categoryOfGame = await prisma.Category.findMany({where: {id: game[0].gameCategory} });
-        const editorOfGame = await prisma.Editor.findMany({where: {id: game[0].gameEditor} });
+        const categoryOfGame = await prisma.Category.findUnique({where: {id: game.gameCategory} });
+        const editorOfGame = await prisma.Editor.findUnique({where: {id: game.gameEditor} });
         res.render("Game/indexGameSolo", {
             game,
             categoryOfGame,
@@ -94,13 +94,18 @@ router.post("/addGame", upload.single('picture'), async (req, res) => {  //recoi
 
 
 router.get("/editGame/:name", async (req, res) => {
-    const game = await prisma.Game.findMany({where: {name: req.params.name} });
-    const category = await prisma.Category.findMany();
-    const editor = await prisma.Editor.findMany();
+    const game = await prisma.Game.findUnique({where: {name: req.params.name} });
+    const categoryGame = await prisma.Category.findUnique({where: {id: game.gameCategory}}); //category actuelle
+    const editorGame = await prisma.Editor.findUnique({where: {id: game.gameEditor}}); //editor actuelle
+
+    const category = await prisma.Category.findMany({where: {id: {not: game.gameCategory}}});
+    const editor = await prisma.Editor.findMany({where: {id: {not: game.gameEditor}}});
     res.render("Game/editGame", {
         game,
         category,
-        editor
+        editor,
+        categoryGame,
+        editorGame
     });
 });
 

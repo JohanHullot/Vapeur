@@ -1,23 +1,23 @@
 
 <form id="editGameForm" method="post" enctype="multipart/form-data"> {{!-- enctype pour uplaod les photos --}}
     
-    {{#each game}}
-        <input type="text" name="name" value="{{name}}" required />
-        <input type="text" name="description" value="{{description}}" required />
-        <input type="datetime-local" name="date" required/>
-    {{/each}}
+    <input type="text" name="name" value="{{game.name}}" required />
+    <input type="text" name="description" value="{{game.description}}" required />
+    <input type="datetime-local" name="date" required/>
+
 
     <label for="category">Choisir la categorie:</label>
     <select name="category">
-
-    {{#each category}}
-        <option id="{{id}}">{{name}}</option>
-    {{/each}}
-        
+        <option id="{{categoryGame.id}}">{{categoryGame.name}}</option>
+        {{#each category}}
+            <option id="{{id}}">{{name}}</option>
+        {{/each}}
     </select>
+
 
     <label for="editor">Choisir l'éditeur:</label>
     <select name="editor">
+        <option id="{{editorGame.id}}">{{editorGame.name}}</option>
         {{#each editor}}
             <option id="{{id}}">{{name}}</option>
         {{/each}}

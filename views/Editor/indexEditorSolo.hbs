@@ -1,9 +1,8 @@
-{{#each editor}}
-<h2>{{name}}</h2>
+<h2>{{editor.name}}</h2>
 
-<a href="../editEditor/{{name}}">Modifier l'éditeur</a><br/>
-<a href="../suppressEditor/{{name}}">Supprimer l'éditeur</a>
-{{/each}}
+<a href="../editEditor/{{editor.name}}">Modifier l'éditeur</a><br/>
+<a href="../suppressEditor/{{editor.name}}">Supprimer l'éditeur</a>
+
 
 <br/><br/>
 {{#each gameOfEditor}}
