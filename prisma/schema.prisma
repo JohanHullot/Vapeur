@@ -29,7 +29,7 @@ model Game {
   id          Int      @id @default(autoincrement())
   name        String   @unique
   description String
-  publishDate DateTime 
+  publishDate DateTime @default(now())
   inMainPage  Boolean  @default(false)
   nameOfImage String   @default("")
 
