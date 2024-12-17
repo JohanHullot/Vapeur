@@ -1,5 +1,5 @@
 # Vapeur 
-done by [Johan Hullot](https://github.com/JohanHullot)
+Fait par [Johan Hullot](https://github.com/JohanHullot)
 
 Bienvenue sur Vapeur!!
 Le site web qui répertorie n'importe quel jeux !
