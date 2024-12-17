@@ -39,6 +39,24 @@ app.get("/", async (req, res) =>
     });
 })
 
+app.post("/search/", (req, res) =>
+{
+    res.redirect("/search/" + req.body.search)
+})
+
+app.get("/search/:data", async (req, res) =>
+{
+    const game = await prisma.Game.findMany({where: {name: {contains: req.params.data}}});
+    const editor = await prisma.Editor.findMany({where: {name: {contains: req.params.data}}});
+    const category = await prisma.Category.findMany({where: {name: {contains: req.params.data}}});
+
+    res.render("search", {
+        game,
+        editor,
+        category
+    })
+})
+
 
 //CATEGORY
 app.use(categoryRouter); //Routes category
