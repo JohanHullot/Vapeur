@@ -32,10 +32,6 @@ app.use('/uploads', express.static('uploads'));
 
 app.get("/", async (req, res) =>
 {
-    //utils.createCategoryDefault(); //Données implémentées dans la db
-    //utils.createEditorDefault();
-    //utils.createGameDefault();
-
     const game = await prisma.Game.findMany({where: {inMainPage: true}}); //Trouve tout les jeux de la base de donnees
 
     res.render("index",{    //index.hbs est afficher sur le site
