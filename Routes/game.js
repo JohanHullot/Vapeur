@@ -129,7 +129,7 @@ router.post("/editGame/:name", upload.single('picture'), async (req, res) => {
                 nameImage = req.file.originalname;
 
             utils.editGame(req.body, req.params.name, nameImage);
-            console.log("Pas de problème rencontrer");
+            //console.log("Pas de problème rencontrer");
         }
     }
     catch(err) //Si le try a planté
@@ -154,7 +154,7 @@ router.get("/suppressGame/:name", async (req, res) => {
     try
     {
         utils.suppressGame(req.params.name);
-        console.log("Pas de problème rencontrer");
+        //console.log("Pas de problème rencontrer");
         res.redirect("/Game");
     }
     catch(err) //Si le try a planté

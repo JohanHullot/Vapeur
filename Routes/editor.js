@@ -56,7 +56,7 @@ router.post("/addEditor", async (req, res) => {  //recois le form
         else //sinon implementation db
         {
             utils.addEditor(req.body);
-            console.log("Pas de problème rencontrer");
+            //console.log("Pas de problème rencontrer");
         }
     }
     catch(err) //Si le try a planté
@@ -102,7 +102,7 @@ router.post("/editEditor/:name", async (req, res) => {  //recois le form
         else //sinon implementation db
         {
             utils.editEditor(req.body,req.params.name);
-            console.log("Pas de problème rencontrer");
+            //console.log("Pas de problème rencontrer");
         }
     }
     catch(err) //Si le try a planté
@@ -127,10 +127,8 @@ router.get("/suppressEditor/:name", async (req, res) => {
     try
     {
         const editor = await prisma.Editor.findMany({where: {name: req.params.name} });
-        console.log(req.params.name);
         if (editor[0])
         {
-            console.log(editor[0].id)
             const game = await prisma.Game.findMany({where: {gameEditor: editor[0].id}});
 
 
