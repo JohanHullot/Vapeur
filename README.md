@@ -1,7 +1,7 @@
 # Vapeur 
 Fait par [Johan Hullot](https://github.com/JohanHullot)
 
-Bienvenue sur Vapeur!!
+Bienvenue sur Vapeur !!
 Le site web qui répertorie n'importe quel jeux !
 
 
