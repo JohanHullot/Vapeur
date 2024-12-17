@@ -35,7 +35,7 @@ npx prisma migrate dev
 ```
 - Implémentation de données par défault dans la base
 ```bash
-npx run seed
+npm run seed
 ```
 - Vous pouvez maintenant démarrer le serveur : 
 ```bash
