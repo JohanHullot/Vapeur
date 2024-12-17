@@ -9,11 +9,27 @@ NodeJs
 
 # Utilisation
 
-- Ouvrez l'invite de commande pour cloner le dossier git tapez :
+Dans l'invite de commande (CMD)
+
+- Copiez l'url de l'endroit ou vous voulez cloner le git :
+```bash
+cd C:\VotreDossier
+```
+- Clonez le dossier git :
 ```bash
 git clone https://github.com/JohanHullot/Vapeur.git
 ```
-- Dans l'IDE de votre choix, vous pouvez mettre le serveur en marche en entrant cette commande dans le terminale
+
+- Entrer dans le dossier Vapeur
+```bash
+cd Vapeur
+```
+
+- Installez Express : 
+```bash
+npm install express
+```
+- Vous pouvez maintenant démarrer le serveur : 
 ```bash
 npm start
 ```
