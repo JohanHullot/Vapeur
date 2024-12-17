@@ -2,7 +2,6 @@
 <div id="presGame">
     <div>
         <p>{{game.description}}</p>
-        <p>{{game.publishDate}}</p>
     </div>
 
 {{#if game.nameOfImage}}
@@ -11,6 +10,8 @@
     </div>
 {{/if}}
 </div>
+
+<p>Date de Sortie du jeu : {{game.publishDate}}</p>
 
 <p>Catégorie :
     <a href="../Category/{{categoryOfGame.name}}">{{categoryOfGame.name}}</a>
@@ -30,7 +31,6 @@
 </li>
 
 <li>
-    
 {{#if inMainPage}}
     <a href="../setOff/{{game.name}}">Enlever le jeu de la une !</a>
 {{else}}
