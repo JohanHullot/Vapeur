@@ -26,9 +26,9 @@ git clone https://github.com/JohanHullot/Vapeur.git
 cd Vapeur
 ```
 
-- Installez Express : 
+- Installez les dépendances : 
 ```bash
-npm install express
+npm install
 ```
 - Création de la base de donnée : 
 ```bash
